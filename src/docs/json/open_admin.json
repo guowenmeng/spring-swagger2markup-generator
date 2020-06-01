@@ -1,0 +1,4660 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "开黑三国接口文档说明",
+        "title": "通用游戏运营API"
+    },
+    "host": "192.168.85.125:52001",
+    "basePath": "/api",
+    "tags": [
+        {
+            "name": "action-log-controller",
+            "description": "行为日志，个人邮件"
+        },
+        {
+            "name": "external-service-controller",
+            "description": "外部服务调用"
+        },
+        {
+            "name": "game-controller",
+            "description": "配置相关信息"
+        },
+        {
+            "name": "game-data-statistics-controller",
+            "description": "统计数据"
+        },
+        {
+            "name": "login-controller",
+            "description": "个人信息"
+        },
+        {
+            "name": "player-action-controller",
+            "description": "玩家信息"
+        },
+        {
+            "name": "player-action-group-controller",
+            "description": "玩家行为组"
+        },
+        {
+            "name": "sys-user-controller",
+            "description": "系统用户"
+        },
+        {
+            "name": "二期",
+            "description": "公告管理"
+        }
+    ],
+    "paths": {
+        "/actionGroup": {
+            "get": {
+                "tags": [
+                    "player-action-group-controller"
+                ],
+                "summary": "行为组列表",
+                "operationId": "listUsingGET_5",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "limit",
+                        "required": false,
+                        "type": "integer",
+                        "default": 10,
+                        "format": "int32"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page",
+                        "required": false,
+                        "type": "integer",
+                        "default": 1,
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ResponseDto«PlayerActionGroupPageResponse»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "uid": [
+                            "global"
+                        ]
+                    },
+                    {
+                        "token": [
+                            "global"
+                        ]
+                    }
+                ],
+                "deprecated": false
+            },
+            "post": {
+                "tags": [
+                    "player-action-group-controller"
+                ],
+                "summary": "新增行为组",
+                "operationId": "addUsingPOST_5",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "addRequest",
+                        "description": "addRequest",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/新增组对象"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ResponseDto«SingleResponse«boolean»»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "uid": [
+                            "global"
+                        ]
+                    },
+                    {
+                        "token": [
+                            "global"
+                        ]
+                    }
+                ],
+                "deprecated": false
+            }
+        },
+        "/actionGroup/events": {
+            "get": {
+                "tags": [
+                    "player-action-group-controller"
+                ],
+                "summary": "获取行为列表",
+                "operationId": "getGameEventsUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "gameId",
+                        "in": "query",
+                        "description": "gameId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ResponseDto«List«GameEventsResponse»»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "uid": [
+                            "global"
+                        ]
+                    },
+                    {
+                        "token": [
+                            "global"
+                        ]
+                    }
+                ],
+                "deprecated": false
+            }
+        },
+        "/actionGroup/getByGroupCode": {
+            "get": {
+                "tags": [
+                    "player-action-group-controller"
+                ],
+                "summary": "获取统计组列表",
+                "operationId": "getOpenStatisticsGroupUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "sign",
+                        "in": "query",
+                        "description": "sign",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ResponseDto«List«ActionByGroupCodeResponse»»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "uid": [
+                            "global"
+                        ]
+                    },
+                    {
+                        "token": [
+                            "global"
+                        ]
+                    }
+                ],
+                "deprecated": false
+            }
+        },
+        "/actionGroup/{groupId}": {
+            "put": {
+                "tags": [
+                    "player-action-group-controller"
+                ],
+                "summary": "修改行为组",
+                "operationId": "updateUsingPUT_2",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "groupId",
+                        "in": "path",
+                        "description": "groupId",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "in": "body",
+                        "name": "updateRequest",
+                        "description": "updateRequest",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/修改组对象"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ResponseDto«SingleResponse«boolean»»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "uid": [
+                            "global"
+                        ]
+                    },
+                    {
+                        "token": [
+                            "global"
+                        ]
+                    }
+                ],
+                "deprecated": false
+            },
+            "delete": {
+                "tags": [
+                    "player-action-group-controller"
+                ],
+                "summary": "删除行为组",
+                "operationId": "deleteUsingDELETE_1",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "groupId",
+                        "in": "path",
+                        "description": "groupId",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ResponseDto«SingleResponse«boolean»»"
+                        }
+                    },
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "uid": [
+                            "global"
+                        ]
+                    },
+                    {
+                        "token": [
+                            "global"
+                        ]
+                    }
+                ],
+                "deprecated": false
+            }
+        },
+        "/actionLog/player": {
+            "post": {
+                "tags": [
+                    "action-log-controller"
+                ],
+                "summary": "玩家行为日志",
+                "operationId": "playerUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "logRequest",
+                        "description": "logRequest",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/玩家行为日志查询"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ResponseDto«PlayerActionLog»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "uid": [
+                            "global"
+                        ]
+                    },
+                    {
+                        "token": [
+                            "global"
+                        ]
+                    }
+                ],
+                "deprecated": false
+            }
+        },
+        "/admin": {
+            "get": {
+                "tags": [
+                    "sys-user-controller"
+                ],
+                "summary": "用户列表",
+                "operationId": "listUsingGET_7",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "limit",
+                        "required": false,
+                        "type": "integer",
+                        "default": 10,
+                        "format": "int32"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page",
+                        "required": false,
+                        "type": "integer",
+                        "default": 1,
+                        "format": "int32"
+                    },
+                    {
+                        "name": "uid",
+                        "in": "header",
+                        "description": "uid",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ResponseDto«SysUserPageResponse»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "uid": [
+                            "global"
+                        ]
+                    },
+                    {
+                        "token": [
+                            "global"
+                        ]
+                    }
+                ],
+                "deprecated": false
+            },
+            "post": {
+                "tags": [
+                    "sys-user-controller"
+                ],
+                "summary": "新增用户",
+                "operationId": "addUsingPOST_6",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "addRequest",
+                        "description": "addRequest",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/用户请求实体"
+                        }
+                    },
+                    {
+                        "name": "uid",
+                        "in": "header",
+                        "description": "uid",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ResponseDto«SingleResponse»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "uid": [
+                            "global"
+                        ]
+                    },
+                    {
+                        "token": [
+                            "global"
+                        ]
+                    }
+                ],
+                "deprecated": false
+            }
+        },
+        "/admin/role/getRolePermission": {
+            "get": {
+                "tags": [
+                    "二期"
+                ],
+                "summary": "获取角色具有的权限",
+                "operationId": "getRolePermissionUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "roleId",
+                        "in": "query",
+                        "description": "roleId",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ResponseDto«RolePermissionResponse»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "uid": [
+                            "global"
+                        ]
+                    },
+                    {
+                        "token": [
+                            "global"
+                        ]
+                    }
+                ],
+                "deprecated": false
+            }
+        },
+        "/admin/role/list": {
+            "get": {
+                "tags": [
+                    "二期"
+                ],
+                "summary": "角色列表",
+                "operationId": "listUsingGET_6",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "limit",
+                        "required": false,
+                        "type": "integer",
+                        "default": 10,
+                        "format": "int32"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page",
+                        "required": false,
+                        "type": "integer",
+                        "default": 1,
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ResponseDto«RoleResponse»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "uid": [
+                            "global"
+                        ]
+                    },
+                    {
+                        "token": [
+                            "global"
+                        ]
+                    }
+                ],
+                "deprecated": false
+            }
+        },
+        "/admin/role/setRolePermission": {
+            "post": {
+                "tags": [
+                    "二期"
+                ],
+                "summary": "新增/修改角色，并为角色授权",
+                "operationId": "setRolePermissionUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "permisssionRequest",
+                        "description": "permisssionRequest",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/PermisssionRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ResponseDto«SingleResponse»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "uid": [
+                            "global"
+                        ]
+                    },
+                    {
+                        "token": [
+                            "global"
+                        ]
+                    }
+                ],
+                "deprecated": false
+            }
+        },
+        "/admin/{userId}": {
+            "put": {
+                "tags": [
+                    "sys-user-controller"
+                ],
+                "summary": "修改用户",
+                "operationId": "updateUsingPUT_3",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "uid",
+                        "in": "header",
+                        "description": "uid",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "in": "body",
+                        "name": "updateRequest",
+                        "description": "updateRequest",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/用户请求实体"
+                        }
+                    },
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "userId",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ResponseDto«SingleResponse»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "uid": [
+                            "global"
+                        ]
+                    },
+                    {
+                        "token": [
+                            "global"
+                        ]
+                    }
+                ],
+                "deprecated": false
+            },
+            "delete": {
+                "tags": [
+                    "sys-user-controller"
+                ],
+                "summary": "删除用户",
+                "operationId": "deleteUsingDELETE_2",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "userId",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ResponseDto«SingleResponse»"
+                        }
+                    },
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "uid": [
+                            "global"
+                        ]
+                    },
+                    {
+                        "token": [
+                            "global"
+                        ]
+                    }
+                ],
+                "deprecated": false
+            }
+        },
+        "/announcement/add": {
+            "post": {
+                "tags": [
+                    "二期"
+                ],
+                "summary": "新增公告申请",
+                "operationId": "addUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "infoRequest",
+                        "description": "infoRequest",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/AnnouncementInfoAddRequest"
+                        }
+                    },
+                    {
+                        "name": "uid",
+                        "in": "header",
+                        "description": "uid",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ResponseDto«SingleResponse«boolean»»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "uid": [
+                            "global"
+                        ]
+                    },
+                    {
+                        "token": [
+                            "global"
+                        ]
+                    }
+                ],
+                "deprecated": false
+            }
+        },
+        "/announcement/audit/{recordId}": {
+            "put": {
+                "tags": [
+                    "二期"
+                ],
+                "summary": "公告审批",
+                "operationId": "auditUsingPUT",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "auditStatus",
+                        "in": "query",
+                        "description": "auditStatus",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "INIT",
+                            "PASS",
+                            "REJECT"
+                        ]
+                    },
+                    {
+                        "name": "recordId",
+                        "in": "path",
+                        "description": "recordId",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ResponseDto«SingleResponse«boolean»»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "uid": [
+                            "global"
+                        ]
+                    },
+                    {
+                        "token": [
+                            "global"
+                        ]
+                    }
+                ],
+                "deprecated": false
+            }
+        },
+        "/announcement/getTypes": {
+            "get": {
+                "tags": [
+                    "二期"
+                ],
+                "summary": "获取公告类型",
+                "operationId": "getAnnouncementTypesUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ResponseDto«List«AnnouncementTypeResponse»»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "uid": [
+                            "global"
+                        ]
+                    },
+                    {
+                        "token": [
+                            "global"
+                        ]
+                    }
+                ],
+                "deprecated": false
+            }
+        },
+        "/announcement/list": {
+            "get": {
+                "tags": [
+                    "二期"
+                ],
+                "summary": "公告列表",
+                "operationId": "listUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "limit",
+                        "required": false,
+                        "type": "integer",
+                        "default": 10,
+                        "format": "int32"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page",
+                        "required": false,
+                        "type": "integer",
+                        "default": 1,
+                        "format": "int32"
+                    },
+                    {
+                        "name": "pageType",
+                        "in": "query",
+                        "description": "pageType",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "APPLY",
+                            "AUDIT"
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ResponseDto«公告响应实体»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "uid": [
+                            "global"
+                        ]
+                    },
+                    {
+                        "token": [
+                            "global"
+                        ]
+                    }
+                ],
+                "deprecated": false
+            }
+        },
+        "/cdk/add": {
+            "post": {
+                "tags": [
+                    "二期"
+                ],
+                "summary": "新增CDK申请",
+                "operationId": "addUsingPOST_1",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "infoRequest",
+                        "description": "infoRequest",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CdkAddRequest"
+                        }
+                    },
+                    {
+                        "name": "uid",
+                        "in": "header",
+                        "description": "uid",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ResponseDto«SingleResponse«boolean»»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "uid": [
+                            "global"
+                        ]
+                    },
+                    {
+                        "token": [
+                            "global"
+                        ]
+                    }
+                ],
+                "deprecated": false
+            }
+        },
+        "/cdk/audit/{recordId}": {
+            "put": {
+                "tags": [
+                    "二期"
+                ],
+                "summary": "礼包码导出或者拒绝",
+                "operationId": "auditAndExportUsingPUT",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "auditStatus",
+                        "in": "query",
+                        "description": "auditStatus",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "INIT",
+                            "PASS",
+                            "REJECT"
+                        ]
+                    },
+                    {
+                        "name": "recordId",
+                        "in": "path",
+                        "description": "recordId",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ResponseDto«List«string»»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "uid": [
+                            "global"
+                        ]
+                    },
+                    {
+                        "token": [
+                            "global"
+                        ]
+                    }
+                ],
+                "deprecated": false
+            }
+        },
+        "/cdk/list": {
+            "get": {
+                "tags": [
+                    "二期"
+                ],
+                "summary": "CDK列表",
+                "operationId": "listUsingGET_1",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "limit",
+                        "required": false,
+                        "type": "integer",
+                        "default": 10,
+                        "format": "int32"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page",
+                        "required": false,
+                        "type": "integer",
+                        "default": 1,
+                        "format": "int32"
+                    },
+                    {
+                        "name": "pageType",
+                        "in": "query",
+                        "description": "pageType",
+                        "required": false,
+                        "type": "string",
+                        "enum": [
+                            "APPLY",
+                            "AUDIT"
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ResponseDto«CDK响应实体»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "uid": [
+                            "global"
+                        ]
+                    },
+                    {
+                        "token": [
+                            "global"
+                        ]
+                    }
+                ],
+                "deprecated": false
+            }
+        },
+        "/email/add": {
+            "post": {
+                "tags": [
+                    "二期"
+                ],
+                "summary": "新增邮件申请",
+                "operationId": "addUsingPOST_2",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "addRequest",
+                        "description": "addRequest",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/EmailInfoAddRequest"
+                        }
+                    },
+                    {
+                        "name": "uid",
+                        "in": "header",
+                        "description": "uid",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ResponseDto«SingleResponse«boolean»»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "uid": [
+                            "global"
+                        ]
+                    },
+                    {
+                        "token": [
+                            "global"
+                        ]
+                    }
+                ],
+                "deprecated": false
+            }
+        },
+        "/email/audit/{recordId}": {
+            "put": {
+                "tags": [
+                    "二期"
+                ],
+                "summary": "邮件审批",
+                "operationId": "auditUsingPUT_1",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "auditStatus",
+                        "in": "query",
+                        "description": "auditStatus",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "INIT",
+                            "PASS",
+                            "REJECT"
+                        ]
+                    },
+                    {
+                        "name": "recordId",
+                        "in": "path",
+                        "description": "recordId",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ResponseDto«SingleResponse«boolean»»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "uid": [
+                            "global"
+                        ]
+                    },
+                    {
+                        "token": [
+                            "global"
+                        ]
+                    }
+                ],
+                "deprecated": false
+            }
+        },
+        "/email/list": {
+            "get": {
+                "tags": [
+                    "二期"
+                ],
+                "summary": "邮件列表",
+                "operationId": "listUsingGET_2",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "emailType",
+                        "in": "query",
+                        "description": "emailType",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "ALL",
+                            "GROUP",
+                            "PERSONAL"
+                        ]
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "limit",
+                        "required": false,
+                        "type": "integer",
+                        "default": 10,
+                        "format": "int32"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page",
+                        "required": false,
+                        "type": "integer",
+                        "default": 1,
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ResponseDto«邮件响应体»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "uid": [
+                            "global"
+                        ]
+                    },
+                    {
+                        "token": [
+                            "global"
+                        ]
+                    }
+                ],
+                "deprecated": false
+            }
+        },
+        "/externalServiceCall": {
+            "get": {
+                "tags": [
+                    "external-service-controller"
+                ],
+                "summary": "服务列表",
+                "operationId": "listUsingGET_3",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "limit",
+                        "required": false,
+                        "type": "integer",
+                        "default": 10,
+                        "format": "int32"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page",
+                        "required": false,
+                        "type": "integer",
+                        "default": 1,
+                        "format": "int32"
+                    },
+                    {
+                        "name": "serviceName",
+                        "in": "query",
+                        "description": "serviceName",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ResponseDto«ExternalServiceCallPageResponse»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "uid": [
+                            "global"
+                        ]
+                    },
+                    {
+                        "token": [
+                            "global"
+                        ]
+                    }
+                ],
+                "deprecated": false
+            },
+            "post": {
+                "tags": [
+                    "external-service-controller"
+                ],
+                "summary": "新增服务",
+                "operationId": "addUsingPOST_3",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "addRequest",
+                        "description": "addRequest",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/外部服务调用实体"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ResponseDto«SingleResponse»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "uid": [
+                            "global"
+                        ]
+                    },
+                    {
+                        "token": [
+                            "global"
+                        ]
+                    }
+                ],
+                "deprecated": false
+            }
+        },
+        "/externalServiceCall/execute": {
+            "post": {
+                "tags": [
+                    "external-service-controller"
+                ],
+                "summary": "排行榜服务调用",
+                "operationId": "executeUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "params",
+                        "description": "params",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ExternalExecuteParamsRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ResponseDto«List«RankList»»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "uid": [
+                            "global"
+                        ]
+                    },
+                    {
+                        "token": [
+                            "global"
+                        ]
+                    }
+                ],
+                "deprecated": false
+            }
+        },
+        "/externalServiceCall/{serviceId}": {
+            "put": {
+                "tags": [
+                    "external-service-controller"
+                ],
+                "summary": "修改服务",
+                "operationId": "updateUsingPUT",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "serviceId",
+                        "in": "path",
+                        "description": "serviceId",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "in": "body",
+                        "name": "updateRequest",
+                        "description": "updateRequest",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/外部服务调用实体"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ResponseDto«SingleResponse»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "uid": [
+                            "global"
+                        ]
+                    },
+                    {
+                        "token": [
+                            "global"
+                        ]
+                    }
+                ],
+                "deprecated": false
+            },
+            "delete": {
+                "tags": [
+                    "external-service-controller"
+                ],
+                "summary": "禁用服务",
+                "operationId": "deleteUsingDELETE",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "serviceId",
+                        "in": "path",
+                        "description": "serviceId",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "status",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "OFF",
+                            "ON"
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ResponseDto«SingleResponse»"
+                        }
+                    },
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "uid": [
+                            "global"
+                        ]
+                    },
+                    {
+                        "token": [
+                            "global"
+                        ]
+                    }
+                ],
+                "deprecated": false
+            }
+        },
+        "/gameConfig/channelIds": {
+            "get": {
+                "tags": [
+                    "game-controller"
+                ],
+                "summary": "获取渠道",
+                "operationId": "getChannelIdsUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "uid",
+                        "in": "header",
+                        "description": "uid",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ResponseDto«List«渠道实体»»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "uid": [
+                            "global"
+                        ]
+                    },
+                    {
+                        "token": [
+                            "global"
+                        ]
+                    }
+                ],
+                "deprecated": false
+            }
+        },
+        "/gameConfig/gameId": {
+            "get": {
+                "tags": [
+                    "game-controller"
+                ],
+                "summary": "获取游戏id",
+                "operationId": "getGameIdUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ResponseDto«游戏id实体»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "uid": [
+                            "global"
+                        ]
+                    },
+                    {
+                        "token": [
+                            "global"
+                        ]
+                    }
+                ],
+                "deprecated": false
+            }
+        },
+        "/gameConfig/server": {
+            "get": {
+                "tags": [
+                    "二期"
+                ],
+                "summary": "获取服务器列表",
+                "operationId": "getGameServerListUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "channelId",
+                        "in": "query",
+                        "description": "channelId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "gameId",
+                        "in": "query",
+                        "description": "gameId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ResponseDto«List«GameServerResponse»»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "uid": [
+                            "global"
+                        ]
+                    },
+                    {
+                        "token": [
+                            "global"
+                        ]
+                    }
+                ],
+                "deprecated": false
+            }
+        },
+        "/gameConfig/v2/channelIds": {
+            "get": {
+                "tags": [
+                    "二期"
+                ],
+                "summary": "获取具有权限的渠道",
+                "operationId": "getChannelIdsV2UsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "uid",
+                        "in": "header",
+                        "description": "uid",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ResponseDto«List«渠道实体»»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "uid": [
+                            "global"
+                        ]
+                    },
+                    {
+                        "token": [
+                            "global"
+                        ]
+                    }
+                ],
+                "deprecated": false
+            }
+        },
+        "/gsRecharge/add": {
+            "post": {
+                "tags": [
+                    "二期"
+                ],
+                "summary": "新增gs充值申请",
+                "operationId": "addUsingPOST_4",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "infoRequest",
+                        "description": "infoRequest",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/GsRechargeInfoAddRequest"
+                        }
+                    },
+                    {
+                        "name": "uid",
+                        "in": "header",
+                        "description": "uid",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ResponseDto«SingleResponse«boolean»»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "uid": [
+                            "global"
+                        ]
+                    },
+                    {
+                        "token": [
+                            "global"
+                        ]
+                    }
+                ],
+                "deprecated": false
+            }
+        },
+        "/gsRecharge/audit/{recordId}": {
+            "put": {
+                "tags": [
+                    "二期"
+                ],
+                "summary": "GS充值审批",
+                "operationId": "auditUsingPUT_2",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "auditStatus",
+                        "in": "query",
+                        "description": "auditStatus",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "INIT",
+                            "PASS",
+                            "REJECT"
+                        ]
+                    },
+                    {
+                        "name": "recordId",
+                        "in": "path",
+                        "description": "recordId",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ResponseDto«SingleResponse«boolean»»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "uid": [
+                            "global"
+                        ]
+                    },
+                    {
+                        "token": [
+                            "global"
+                        ]
+                    }
+                ],
+                "deprecated": false
+            }
+        },
+        "/gsRecharge/list": {
+            "get": {
+                "tags": [
+                    "二期"
+                ],
+                "summary": "GS充值列表",
+                "operationId": "listUsingGET_4",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "limit",
+                        "required": false,
+                        "type": "integer",
+                        "default": 10,
+                        "format": "int32"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page",
+                        "required": false,
+                        "type": "integer",
+                        "default": 1,
+                        "format": "int32"
+                    },
+                    {
+                        "name": "pageType",
+                        "in": "query",
+                        "description": "pageType",
+                        "required": false,
+                        "type": "string",
+                        "enum": [
+                            "APPLY",
+                            "AUDIT"
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ResponseDto«GS充值响应实体»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "uid": [
+                            "global"
+                        ]
+                    },
+                    {
+                        "token": [
+                            "global"
+                        ]
+                    }
+                ],
+                "deprecated": false
+            }
+        },
+        "/login": {
+            "post": {
+                "tags": [
+                    "login-controller"
+                ],
+                "summary": "登陆",
+                "operationId": "loginUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "loginRequest",
+                        "description": "loginRequest",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/LoginRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ResponseDto«SysUserLoginResponse»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "uid": [
+                            "global"
+                        ]
+                    },
+                    {
+                        "token": [
+                            "global"
+                        ]
+                    }
+                ],
+                "deprecated": false
+            }
+        },
+        "/player/info": {
+            "post": {
+                "tags": [
+                    "player-action-controller"
+                ],
+                "summary": "个人信息",
+                "operationId": "playerUsingPOST_1",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "playerInfoRequest",
+                        "description": "playerInfoRequest",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/玩家个人信息查询"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ResponseDto«PlayerInfo»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "uid": [
+                            "global"
+                        ]
+                    },
+                    {
+                        "token": [
+                            "global"
+                        ]
+                    }
+                ],
+                "deprecated": false
+            }
+        },
+        "/profile": {
+            "get": {
+                "tags": [
+                    "二期"
+                ],
+                "summary": "获取个人信息",
+                "operationId": "profileUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "uid",
+                        "in": "header",
+                        "description": "uid",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ResponseDto«UserPermissionsDto»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "uid": [
+                            "global"
+                        ]
+                    },
+                    {
+                        "token": [
+                            "global"
+                        ]
+                    }
+                ],
+                "deprecated": false
+            },
+            "put": {
+                "tags": [
+                    "login-controller"
+                ],
+                "summary": "修改个人信息",
+                "operationId": "updateUsingPUT_1",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "uid",
+                        "in": "header",
+                        "description": "uid",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "in": "body",
+                        "name": "updateRequest",
+                        "description": "updateRequest",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/用户请求修改实体"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ResponseDto«SingleResponse»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "uid": [
+                            "global"
+                        ]
+                    },
+                    {
+                        "token": [
+                            "global"
+                        ]
+                    }
+                ],
+                "deprecated": false
+            }
+        },
+        "/statistics/dailyKpi": {
+            "get": {
+                "tags": [
+                    "game-data-statistics-controller"
+                ],
+                "summary": "日报",
+                "operationId": "dailyKpiUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "beginTime",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    {
+                        "name": "channelId",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "endTime",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "platform",
+                        "in": "query",
+                        "description": "设备类型",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "serverId",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ResponseDto«StatisticsResponse»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "uid": [
+                            "global"
+                        ]
+                    },
+                    {
+                        "token": [
+                            "global"
+                        ]
+                    }
+                ],
+                "deprecated": false
+            }
+        },
+        "/statistics/expendAndLevel": {
+            "get": {
+                "tags": [
+                    "game-data-statistics-controller"
+                ],
+                "summary": "消耗/层级统计。元宝统计、铜钱统计、征战进度统计、试练塔统计",
+                "operationId": "expendAndLevelUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "beginTime",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    {
+                        "name": "channelId",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "endTime",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "platform",
+                        "in": "query",
+                        "description": "设备类型",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "serverId",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "statisticsType",
+                        "in": "query",
+                        "description": "GOLD(\"元宝统计\"),CASH(\"铜钱统计\"),WARPATH(\"征战进度统计\"),TEST_TOWER(\"试练塔统计\")",
+                        "required": false,
+                        "type": "string",
+                        "enum": [
+                            "GOLD",
+                            "CASH",
+                            "WARPATH",
+                            "TEST_TOWER"
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ResponseDto«StatisticsResponse»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "uid": [
+                            "global"
+                        ]
+                    },
+                    {
+                        "token": [
+                            "global"
+                        ]
+                    }
+                ],
+                "deprecated": false
+            }
+        },
+        "/statistics/ltv": {
+            "get": {
+                "tags": [
+                    "game-data-statistics-controller"
+                ],
+                "summary": "LTV统计",
+                "operationId": "ltvUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "beginTime",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    {
+                        "name": "channelId",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "endTime",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "platform",
+                        "in": "query",
+                        "description": "设备类型",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "serverId",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ResponseDto«StatisticsResponse»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "uid": [
+                            "global"
+                        ]
+                    },
+                    {
+                        "token": [
+                            "global"
+                        ]
+                    }
+                ],
+                "deprecated": false
+            }
+        },
+        "/statistics/recharge": {
+            "get": {
+                "tags": [
+                    "game-data-statistics-controller"
+                ],
+                "summary": "充值总额",
+                "operationId": "rechargeUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "beginTime",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    {
+                        "name": "channelId",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "endTime",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "platform",
+                        "in": "query",
+                        "description": "设备类型",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "serverId",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ResponseDto«StatisticsResponse»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "uid": [
+                            "global"
+                        ]
+                    },
+                    {
+                        "token": [
+                            "global"
+                        ]
+                    }
+                ],
+                "deprecated": false
+            }
+        },
+        "/statistics/userRate": {
+            "get": {
+                "tags": [
+                    "game-data-statistics-controller"
+                ],
+                "summary": "用户留存统计",
+                "operationId": "userRateUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "beginTime",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    {
+                        "name": "channelId",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "endTime",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "platform",
+                        "in": "query",
+                        "description": "设备类型",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "serverId",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ResponseDto«StatisticsResponse»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "uid": [
+                            "global"
+                        ]
+                    },
+                    {
+                        "token": [
+                            "global"
+                        ]
+                    }
+                ],
+                "deprecated": false
+            }
+        }
+    },
+    "securityDefinitions": {
+        "token": {
+            "type": "apiKey",
+            "in": "header"
+        },
+        "uid": {
+            "type": "apiKey",
+            "in": "header"
+        }
+    },
+    "definitions": {
+        "ActionByGroupCodeResponse": {
+            "type": "object",
+            "properties": {
+                "actions": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "groupCode": {
+                    "type": "string"
+                },
+                "groupName": {
+                    "type": "string"
+                }
+            },
+            "title": "ActionByGroupCodeResponse"
+        },
+        "AnnouncementInfoAddRequest": {
+            "type": "object",
+            "properties": {
+                "anocmtContent": {
+                    "type": "string"
+                },
+                "anocmtSendTime": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "anocmtTitle": {
+                    "type": "string"
+                },
+                "anocmtTypeId": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "channelId": {
+                    "type": "string"
+                },
+                "serverId": {
+                    "type": "string"
+                }
+            },
+            "title": "AnnouncementInfoAddRequest"
+        },
+        "AnnouncementTypeResponse": {
+            "type": "object",
+            "properties": {
+                "anocmtTypeCode": {
+                    "type": "string"
+                },
+                "anocmtTypeId": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "anocmtTypeName": {
+                    "type": "string"
+                },
+                "children": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/AnnouncementTypeResponse"
+                    }
+                }
+            },
+            "title": "AnnouncementTypeResponse"
+        },
+        "CDK响应实体": {
+            "type": "object",
+            "properties": {
+                "count": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CDK对象"
+                    }
+                }
+            },
+            "title": "CDK响应实体"
+        },
+        "CDK对象": {
+            "type": "object",
+            "properties": {
+                "auditStatus": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "awardProps": {
+                    "type": "string"
+                },
+                "cdkCount": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "cdkMark": {
+                    "type": "string"
+                },
+                "cdkValidEndTime": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "cdkValidStartTime": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "channelId": {
+                    "type": "string"
+                },
+                "channelName": {
+                    "type": "string"
+                },
+                "createdTime": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "id": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "lowestUseLevel": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "operId": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "operName": {
+                    "type": "string"
+                },
+                "serverId": {
+                    "type": "string"
+                },
+                "updatedTime": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "useCountPerCdk": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "useCountPerRole": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "title": "CDK对象"
+        },
+        "CdkAddRequest": {
+            "type": "object",
+            "properties": {
+                "awardProps": {
+                    "type": "string"
+                },
+                "cdkCount": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "cdkMark": {
+                    "type": "string"
+                },
+                "cdkValidEndTime": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "cdkValidStartTime": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "channelId": {
+                    "type": "string"
+                },
+                "lowestUseLevel": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "serverId": {
+                    "type": "string"
+                },
+                "useCountPerCdk": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "useCountPerRole": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "title": "CdkAddRequest"
+        },
+        "Data": {
+            "type": "object",
+            "properties": {
+                "detail": {
+                    "type": "object"
+                },
+                "playerId": {
+                    "type": "string"
+                },
+                "playerName": {
+                    "type": "string"
+                },
+                "rankId": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "title": "Data"
+        },
+        "EmailInfoAddRequest": {
+            "type": "object",
+            "properties": {
+                "awardProps": {
+                    "type": "string",
+                    "description": "获得奖励 格式: GSID|12/GSID|100"
+                },
+                "channelId": {
+                    "type": "string"
+                },
+                "emailContent": {
+                    "type": "string"
+                },
+                "emailTitle": {
+                    "type": "string"
+                },
+                "emailType": {
+                    "type": "string",
+                    "description": "邮件类型",
+                    "enum": [
+                        "ALL",
+                        "GROUP",
+                        "PERSONAL"
+                    ]
+                },
+                "playerId": {
+                    "type": "string"
+                },
+                "serverId": {
+                    "type": "array",
+                    "description": "区服列表",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "title": "EmailInfoAddRequest"
+        },
+        "ExternalExecuteParamsRequest": {
+            "type": "object",
+            "properties": {
+                "params": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "serviceCode": {
+                    "type": "string"
+                }
+            },
+            "title": "ExternalExecuteParamsRequest"
+        },
+        "ExternalServiceCall": {
+            "type": "object",
+            "properties": {
+                "createdTime": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "id": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "method": {
+                    "type": "string"
+                },
+                "params": {
+                    "type": "string"
+                },
+                "remark": {
+                    "type": "string"
+                },
+                "serviceCode": {
+                    "type": "string"
+                },
+                "serviceName": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "updatedTime": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "url": {
+                    "type": "string"
+                }
+            },
+            "title": "ExternalServiceCall"
+        },
+        "ExternalServiceCallPageResponse": {
+            "type": "object",
+            "properties": {
+                "count": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "externalServiceCalls": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ExternalServiceCall"
+                    }
+                }
+            },
+            "title": "ExternalServiceCallPageResponse"
+        },
+        "GS充值响应实体": {
+            "type": "object",
+            "properties": {
+                "count": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/GS充值对象"
+                    }
+                }
+            },
+            "title": "GS充值响应实体"
+        },
+        "GS充值对象": {
+            "type": "object",
+            "properties": {
+                "auditStatus": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "cdkLevel": {
+                    "type": "string"
+                },
+                "channelId": {
+                    "type": "string"
+                },
+                "channelName": {
+                    "type": "string"
+                },
+                "createdTime": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "id": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "operId": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "operName": {
+                    "type": "string"
+                },
+                "playerId": {
+                    "type": "string"
+                },
+                "rechargeReason": {
+                    "type": "string"
+                },
+                "serverId": {
+                    "type": "string"
+                },
+                "updatedTime": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "title": "GS充值对象"
+        },
+        "GameEventsResponse": {
+            "type": "object",
+            "properties": {
+                "actionCode": {
+                    "type": "string"
+                },
+                "actionName": {
+                    "type": "string"
+                }
+            },
+            "title": "GameEventsResponse"
+        },
+        "GamePlayer": {
+            "type": "object",
+            "properties": {
+                "allianceId": {
+                    "type": "string"
+                },
+                "avatar": {
+                    "type": "string"
+                },
+                "channelId": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "currency": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "data": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "disabledChat": {
+                    "type": "boolean"
+                },
+                "disabledLogin": {
+                    "type": "boolean"
+                },
+                "fighting": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "gameCurrency": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "level": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "nickname": {
+                    "type": "string"
+                },
+                "platformUserId": {
+                    "type": "string"
+                },
+                "playerId": {
+                    "type": "string"
+                },
+                "serverId": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "updateAt": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "vip": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "title": "GamePlayer"
+        },
+        "GamePlayerAction": {
+            "type": "object",
+            "properties": {
+                "action": {
+                    "type": "string"
+                },
+                "channelId": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "createAt": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "currency": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "data": {
+                    "type": "object"
+                },
+                "gameCurrency": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "levelId": {
+                    "type": "string"
+                },
+                "obtainedProps": {
+                    "type": "array",
+                    "items": {
+                        "type": "object"
+                    }
+                },
+                "platform": {
+                    "type": "integer",
+                    "format": "int32",
+                    "minimum": -128,
+                    "maximum": 127
+                },
+                "playerId": {
+                    "type": "string"
+                },
+                "remark": {
+                    "type": "string"
+                },
+                "serverId": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "usedProps": {
+                    "type": "array",
+                    "items": {
+                        "type": "object"
+                    }
+                }
+            },
+            "title": "GamePlayerAction"
+        },
+        "GameServerResponse": {
+            "type": "object",
+            "properties": {
+                "serverId": {
+                    "type": "string"
+                },
+                "serverName": {
+                    "type": "string"
+                }
+            },
+            "title": "GameServerResponse"
+        },
+        "GsRechargeInfoAddRequest": {
+            "type": "object",
+            "properties": {
+                "cdkLevel": {
+                    "type": "string"
+                },
+                "channelId": {
+                    "type": "string"
+                },
+                "playerId": {
+                    "type": "string"
+                },
+                "rechargeReason": {
+                    "type": "string"
+                },
+                "serverId": {
+                    "type": "string"
+                }
+            },
+            "title": "GsRechargeInfoAddRequest"
+        },
+        "LoginRequest": {
+            "type": "object",
+            "properties": {
+                "passwd": {
+                    "type": "string"
+                },
+                "userCode": {
+                    "type": "string"
+                }
+            },
+            "title": "LoginRequest"
+        },
+        "PermisssionRequest": {
+            "type": "object",
+            "properties": {
+                "permissions": {
+                    "description": "权限",
+                    "$ref": "#/definitions/UserPermissionsDto"
+                },
+                "roleId": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "roleName": {
+                    "type": "string"
+                }
+            },
+            "title": "PermisssionRequest"
+        },
+        "PlayerActionGroup": {
+            "type": "object",
+            "properties": {
+                "action": {
+                    "type": "string"
+                },
+                "createdTime": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "groupCode": {
+                    "type": "string"
+                },
+                "groupName": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "openStatistics": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "remark": {
+                    "type": "string"
+                },
+                "updatedTime": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "title": "PlayerActionGroup"
+        },
+        "PlayerActionGroupPageResponse": {
+            "type": "object",
+            "properties": {
+                "count": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "groups": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/PlayerActionGroup"
+                    }
+                }
+            },
+            "title": "PlayerActionGroupPageResponse"
+        },
+        "PlayerActionLog": {
+            "type": "object",
+            "properties": {
+                "gamePlayer": {
+                    "$ref": "#/definitions/GamePlayer"
+                },
+                "lastPage": {
+                    "type": "boolean"
+                },
+                "pagingState": {
+                    "type": "string"
+                },
+                "playerActions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/GamePlayerAction"
+                    }
+                }
+            },
+            "title": "PlayerActionLog"
+        },
+        "PlayerInfo": {
+            "type": "object",
+            "properties": {
+                "lastPage": {
+                    "type": "boolean"
+                },
+                "pagingState": {
+                    "type": "string"
+                },
+                "players": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/GamePlayer"
+                    }
+                }
+            },
+            "title": "PlayerInfo"
+        },
+        "RankList": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Data"
+                    }
+                },
+                "type": {
+                    "type": "string"
+                }
+            },
+            "title": "RankList"
+        },
+        "ResponseDto«CDK响应实体»": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "data": {
+                    "$ref": "#/definitions/CDK响应实体"
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "title": "ResponseDto«CDK响应实体»"
+        },
+        "ResponseDto«ExternalServiceCallPageResponse»": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "data": {
+                    "$ref": "#/definitions/ExternalServiceCallPageResponse"
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "title": "ResponseDto«ExternalServiceCallPageResponse»"
+        },
+        "ResponseDto«GS充值响应实体»": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "data": {
+                    "$ref": "#/definitions/GS充值响应实体"
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "title": "ResponseDto«GS充值响应实体»"
+        },
+        "ResponseDto«List«ActionByGroupCodeResponse»»": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ActionByGroupCodeResponse"
+                    }
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "title": "ResponseDto«List«ActionByGroupCodeResponse»»"
+        },
+        "ResponseDto«List«AnnouncementTypeResponse»»": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/AnnouncementTypeResponse"
+                    }
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "title": "ResponseDto«List«AnnouncementTypeResponse»»"
+        },
+        "ResponseDto«List«GameEventsResponse»»": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/GameEventsResponse"
+                    }
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "title": "ResponseDto«List«GameEventsResponse»»"
+        },
+        "ResponseDto«List«GameServerResponse»»": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/GameServerResponse"
+                    }
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "title": "ResponseDto«List«GameServerResponse»»"
+        },
+        "ResponseDto«List«RankList»»": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/RankList"
+                    }
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "title": "ResponseDto«List«RankList»»"
+        },
+        "ResponseDto«List«string»»": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "title": "ResponseDto«List«string»»"
+        },
+        "ResponseDto«List«渠道实体»»": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/渠道实体"
+                    }
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "title": "ResponseDto«List«渠道实体»»"
+        },
+        "ResponseDto«PlayerActionGroupPageResponse»": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "data": {
+                    "$ref": "#/definitions/PlayerActionGroupPageResponse"
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "title": "ResponseDto«PlayerActionGroupPageResponse»"
+        },
+        "ResponseDto«PlayerActionLog»": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "data": {
+                    "$ref": "#/definitions/PlayerActionLog"
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "title": "ResponseDto«PlayerActionLog»"
+        },
+        "ResponseDto«PlayerInfo»": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "data": {
+                    "$ref": "#/definitions/PlayerInfo"
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "title": "ResponseDto«PlayerInfo»"
+        },
+        "ResponseDto«RolePermissionResponse»": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "data": {
+                    "$ref": "#/definitions/RolePermissionResponse"
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "title": "ResponseDto«RolePermissionResponse»"
+        },
+        "ResponseDto«RoleResponse»": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "data": {
+                    "$ref": "#/definitions/RoleResponse"
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "title": "ResponseDto«RoleResponse»"
+        },
+        "ResponseDto«SingleResponse«boolean»»": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "data": {
+                    "$ref": "#/definitions/SingleResponse«boolean»"
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "title": "ResponseDto«SingleResponse«boolean»»"
+        },
+        "ResponseDto«SingleResponse»": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "data": {
+                    "$ref": "#/definitions/SingleResponse"
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "title": "ResponseDto«SingleResponse»"
+        },
+        "ResponseDto«StatisticsResponse»": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "data": {
+                    "$ref": "#/definitions/StatisticsResponse"
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "title": "ResponseDto«StatisticsResponse»"
+        },
+        "ResponseDto«SysUserLoginResponse»": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "data": {
+                    "$ref": "#/definitions/SysUserLoginResponse"
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "title": "ResponseDto«SysUserLoginResponse»"
+        },
+        "ResponseDto«SysUserPageResponse»": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "data": {
+                    "$ref": "#/definitions/SysUserPageResponse"
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "title": "ResponseDto«SysUserPageResponse»"
+        },
+        "ResponseDto«UserPermissionsDto»": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "data": {
+                    "$ref": "#/definitions/UserPermissionsDto"
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "title": "ResponseDto«UserPermissionsDto»"
+        },
+        "ResponseDto«公告响应实体»": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "data": {
+                    "$ref": "#/definitions/公告响应实体"
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "title": "ResponseDto«公告响应实体»"
+        },
+        "ResponseDto«游戏id实体»": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "data": {
+                    "$ref": "#/definitions/游戏id实体"
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "title": "ResponseDto«游戏id实体»"
+        },
+        "ResponseDto«邮件响应体»": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "data": {
+                    "$ref": "#/definitions/邮件响应体"
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "title": "ResponseDto«邮件响应体»"
+        },
+        "RolePermissionResponse": {
+            "type": "object",
+            "properties": {
+                "permissions": {
+                    "description": "权限信息",
+                    "$ref": "#/definitions/UserPermissionsDto"
+                },
+                "roleInfo": {
+                    "description": "角色信息",
+                    "$ref": "#/definitions/SysRole"
+                }
+            },
+            "title": "RolePermissionResponse"
+        },
+        "RoleResponse": {
+            "type": "object",
+            "properties": {
+                "count": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "sysRoles": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/SysRole"
+                    }
+                }
+            },
+            "title": "RoleResponse"
+        },
+        "SingleResponse": {
+            "type": "object",
+            "properties": {
+                "rt": {
+                    "type": "object"
+                }
+            },
+            "title": "SingleResponse"
+        },
+        "SingleResponse«boolean»": {
+            "type": "object",
+            "properties": {
+                "rt": {
+                    "type": "boolean"
+                }
+            },
+            "title": "SingleResponse«boolean»"
+        },
+        "StatisticsResponse": {
+            "type": "object",
+            "properties": {
+                "count": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "type": "object"
+                    }
+                }
+            },
+            "title": "StatisticsResponse"
+        },
+        "SysRole": {
+            "type": "object",
+            "properties": {
+                "createdTime": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "roleId": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "roleName": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "updatedTime": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "title": "SysRole"
+        },
+        "SysUser": {
+            "type": "object",
+            "properties": {
+                "avatar": {
+                    "type": "string"
+                },
+                "createdTime": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "operId": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "remark": {
+                    "type": "string"
+                },
+                "roleId": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "status": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "updatedTime": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "userCode": {
+                    "type": "string"
+                },
+                "userName": {
+                    "type": "string"
+                }
+            },
+            "title": "SysUser"
+        },
+        "SysUserLoginResponse": {
+            "type": "object",
+            "properties": {
+                "avatar": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "remark": {
+                    "type": "string"
+                },
+                "token": {
+                    "type": "string"
+                },
+                "userCode": {
+                    "type": "string"
+                },
+                "userName": {
+                    "type": "string"
+                }
+            },
+            "title": "SysUserLoginResponse"
+        },
+        "SysUserPageResponse": {
+            "type": "object",
+            "properties": {
+                "count": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "sysUsers": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/SysUser"
+                    }
+                }
+            },
+            "title": "SysUserPageResponse"
+        },
+        "UserPermissionsDto": {
+            "type": "object",
+            "properties": {
+                "buttons": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "channels": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "menus": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "sysUser": {
+                    "$ref": "#/definitions/SysUser"
+                }
+            },
+            "title": "UserPermissionsDto"
+        },
+        "修改组对象": {
+            "type": "object",
+            "properties": {
+                "actions": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "groupName": {
+                    "type": "string"
+                },
+                "openStatistics": {
+                    "type": "string",
+                    "enum": [
+                        "CLOSE",
+                        "OPEN"
+                    ]
+                },
+                "remark": {
+                    "type": "string"
+                }
+            },
+            "title": "修改组对象"
+        },
+        "公告响应实体": {
+            "type": "object",
+            "properties": {
+                "count": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/公告对象"
+                    }
+                }
+            },
+            "title": "公告响应实体"
+        },
+        "公告对象": {
+            "type": "object",
+            "properties": {
+                "anocmtContent": {
+                    "type": "string"
+                },
+                "anocmtSendTime": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "anocmtTitle": {
+                    "type": "string"
+                },
+                "anocmtTypeId": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "anocmtTypeName": {
+                    "type": "string"
+                },
+                "auditStatus": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "channelId": {
+                    "type": "string"
+                },
+                "channelName": {
+                    "type": "string"
+                },
+                "createdTime": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "id": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "operId": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "operName": {
+                    "type": "string"
+                },
+                "serverId": {
+                    "type": "string"
+                },
+                "updatedTime": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "title": "公告对象"
+        },
+        "外部服务调用实体": {
+            "type": "object",
+            "properties": {
+                "method": {
+                    "type": "string"
+                },
+                "params": {
+                    "type": "string"
+                },
+                "remark": {
+                    "type": "string"
+                },
+                "serviceName": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                }
+            },
+            "title": "外部服务调用实体"
+        },
+        "新增组对象": {
+            "type": "object",
+            "properties": {
+                "actions": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "groupCode": {
+                    "type": "string"
+                },
+                "groupName": {
+                    "type": "string"
+                },
+                "openStatistics": {
+                    "type": "string",
+                    "description": "是否开放统计接口",
+                    "enum": [
+                        "CLOSE",
+                        "OPEN"
+                    ]
+                },
+                "remark": {
+                    "type": "string"
+                }
+            },
+            "title": "新增组对象"
+        },
+        "渠道实体": {
+            "type": "object",
+            "properties": {
+                "channelCode": {
+                    "type": "string"
+                },
+                "channelId": {
+                    "type": "string"
+                }
+            },
+            "title": "渠道实体"
+        },
+        "游戏id实体": {
+            "type": "object",
+            "properties": {
+                "gameId": {
+                    "type": "string"
+                }
+            },
+            "title": "游戏id实体"
+        },
+        "玩家个人信息查询": {
+            "type": "object",
+            "properties": {
+                "channelId": {
+                    "type": "string"
+                },
+                "pageSize": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "pagingState": {
+                    "type": "string"
+                },
+                "playerId": {
+                    "type": "string"
+                },
+                "playerName": {
+                    "type": "string"
+                },
+                "serverId": {
+                    "type": "string"
+                }
+            },
+            "title": "玩家个人信息查询"
+        },
+        "玩家行为日志查询": {
+            "type": "object",
+            "properties": {
+                "beginTime": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "channelId": {
+                    "type": "string"
+                },
+                "defaultTimeFlag": {
+                    "type": "boolean"
+                },
+                "endTime": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "groupCode": {
+                    "type": "string"
+                },
+                "pageSize": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "pagingState": {
+                    "type": "string"
+                },
+                "playerId": {
+                    "type": "string"
+                },
+                "playerName": {
+                    "type": "string"
+                },
+                "serverId": {
+                    "type": "string"
+                }
+            },
+            "title": "玩家行为日志查询"
+        },
+        "用户请求修改实体": {
+            "type": "object",
+            "properties": {
+                "avatar": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "passwd": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "remark": {
+                    "type": "string"
+                },
+                "userName": {
+                    "type": "string"
+                }
+            },
+            "title": "用户请求修改实体"
+        },
+        "用户请求实体": {
+            "type": "object",
+            "properties": {
+                "avatar": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "passwd": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "remark": {
+                    "type": "string"
+                },
+                "roleId": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "userCode": {
+                    "type": "string"
+                },
+                "userName": {
+                    "type": "string"
+                }
+            },
+            "title": "用户请求实体"
+        },
+        "邮件响应体": {
+            "type": "object",
+            "properties": {
+                "count": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/邮件对象"
+                    }
+                }
+            },
+            "title": "邮件响应体"
+        },
+        "邮件对象": {
+            "type": "object",
+            "properties": {
+                "auditStatus": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "awardProps": {
+                    "type": "string",
+                    "description": "奖励"
+                },
+                "channelId": {
+                    "type": "string"
+                },
+                "channelName": {
+                    "type": "string"
+                },
+                "createdTime": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "emailContent": {
+                    "type": "string"
+                },
+                "emailTitle": {
+                    "type": "string"
+                },
+                "emailType": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "id": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "operId": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "operName": {
+                    "type": "string"
+                },
+                "playerId": {
+                    "type": "string"
+                },
+                "serverId": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "updatedTime": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "title": "邮件对象"
+        }
+    }
+}
